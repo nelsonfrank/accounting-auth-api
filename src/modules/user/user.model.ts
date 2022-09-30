@@ -24,10 +24,14 @@ const UserSchema = new Schema<UserModelType>(
     role: {
       type: String,
       required: true,
-      enum: ["tester", "moderator", "admin"],
+      enum: ["business", "admin"],
     },
     active: { type: Boolean, default: false },
     verificationToken: { type: String, required: true },
+    verifyBefore: {
+      type: Date,
+      default: () => Date.now() + 24 * 60 * 60 * 1000,
+    },
     createdAt: { type: Date, default: Date.now },
     emailVerifiedAt: { type: Date, required: false },
   },

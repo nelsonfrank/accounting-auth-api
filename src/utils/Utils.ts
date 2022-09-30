@@ -22,7 +22,7 @@ export const sendEmail = async (
   await transporter
     .sendMail({
       from: {
-        name: "Sndbx By Id8",
+        name: "Accounting App",
         address: String(<string>config.HOST_EMAIL_ADRESS),
       },
       to: receiverAddress,
@@ -39,5 +39,17 @@ export const sendEmail = async (
 };
 
 export const generateRandomToken = () => {
-  return Crypto.randomBytes(64).toString("hex");
+  return Crypto.randomBytes(64).toString("hex").substring(0, 5);
+};
+
+export const isInThePast = (date: Date) => {
+  const today = new Date();
+
+  // 👇️ OPTIONAL!
+  // This line sets the hour of the current date to midnight
+  // so the comparison only returns `true` if the passed in date
+  // is at least yesterday
+  today.setHours(0, 0, 0, 0);
+
+  return date < today;
 };

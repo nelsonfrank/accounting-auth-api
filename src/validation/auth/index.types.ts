@@ -39,10 +39,12 @@ export const forgetPasswordValidation = (data: forgetPasswordPayloadType) => {
 
 interface tokenValidationParamsType {
   authToken: string;
+  password: string;
 }
 export const tokenValidation = (data: tokenValidationParamsType) => {
   const schema = Joi.object({
-    authToken: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
   });
 
   return schema.validate(data);
