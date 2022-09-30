@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import UserModel from "../user/user.model";
 import {
   signInValidation,
@@ -42,7 +41,7 @@ const AuthController = {
 
     user
       .save()
-      .then(async (response: any) => {
+      .then(async () => {
         const htmlContent = `Use token <b>${token}</b> to confirm your email`;
         await sendEmail(req.body.email, "Confirm Email", htmlContent);
 
@@ -182,6 +181,8 @@ const AuthController = {
 
     const htmlContent = `Use token <b>${token}</b> to confirm your email`;
     await sendEmail(req.body.email, "Reset password?", htmlContent);
+
+    return;
   },
 
   verifyForgetPasswordToken: async (req: Request, res: Response) => {
